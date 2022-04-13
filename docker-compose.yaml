@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: movieWatchDjango/Dockerfile.prod
+    volumes:
+      - ./:/usr/src/app/
+    command: "python3 manage.py runserver 0.0.0.0:8000 --noreload"
+    ports:
+      - "8000:8000"

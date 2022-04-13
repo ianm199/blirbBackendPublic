@@ -1,0 +1,355 @@
+Endpoint: movies/<int:pk>
+Request types: GET 
+Description: Will return JSON details about a movie
+
+Endpoint: user/
+Request types: Post
+Description: Provide a username and password to create a use
+
+Endpoint:groups/
+Request types: GET, POST
+Description: GET - Return list of all groups in database... will be removed POST - Provide groupID, groupName, groupDesc and create a group
+
+Endpoint: groups/<int:pk>
+Request types: GET
+Description: Will return information for group with the primary key provided
+
+Endpoint: api-token-auth/
+Request types: POST
+Description: Provide a username and password and it will return an authentication token
+
+Endpoint: logout/
+Request types: GET
+Description: Will log out the current user which deletes their authentication token
+
+Endpoint: addmembertogroup/
+Request types: POST 
+Description: will add a member to a group. Need to provide the groupID and the userID
+
+Endpoint: usersgrouplist/
+Request types: GET
+Description: Return all the groups that the currently logged in user is in
+
+Endpoint: groupmemberslist/
+Request types: GET
+Description: Return all members in a group. Provide a groupID
+
+Endpoint: usernameinfo/<username>
+Request types: GET
+Description: Return all members in a group. Put a valid username for username
+
+Endpoint: movie/
+Request types: POST
+Description: Need to provide description, movieTitle, runtime(minutes), notableCast, yearReleased, genre, director... currently all required will be changed later
+
+Endpoint: groupmanagement/<int:groupID>/remove-member/<int:userID>
+Request types: DELETE
+Decription: remove a member from a group... Need to control access to this
+
+Endpoint: groupmanagement/<int:pk>/remove-group
+Request types: DELETE
+Description: Remove the group.. Need to control access to this
+
+Endpoint: groupmanagement/<int:pk>/update
+Request types: PUT, PATCH
+Description: Update group details such as groupName and groupDesc
+
+Endpoint: groupmanagement/<int:groupID>/remove-movie-rec/<int:recID>
+Request Types: DELETE
+Description: Remove a rec from a group *still needs to be tested
+
+Endpoint: addmovierectogroup/
+Request types: POST
+Description: Add a movie rec to a group. Need to provide the movieRecID and groupID
+
+Endpoint: moviereccomendation/
+Request Types: POST
+Description: Add a moviereccomendation by user.
+Need to include EITHER tvShowID OR movieID, recommenderUserID, recommendationDesc, reccomenderRating
+
+Endpoint: movierecomendation/<int:pk>
+Request Types: GET
+Description: Get movie reccomendation by ID, provide the movieRec id for pk
+
+Endpoint: moviereccomendation/<int:pk>/update
+Request Types: GET, PUT, PATCH
+Description: Update or delete movierec by ID. If you are updating need to provide the fields you are updating
+
+Endpoint: groups/<int:groupID>/movierecs
+Request Types: GET
+Description: Get all movie recs that belong to a group
+
+Endpoint: 'userinfo/<int:pk>'
+Request Types: Get
+Description: Get user name by userID
+
+Endpoint: commentonmovierec/
+Request Type: Post
+Description: Post a comment on a movie rec in a group. Provide postID and commentBody. postID is the groupRecID that identifies movie recs in groups
+
+Endpoint: commentonmovierec/<int:pk>/update
+Request type: PATCH, DELETE
+Description: Allows users to edit or delete comments on posts. if updating provide a new commentBody
+
+Endpoint: movierecsingroups/<int:postID>/comments
+Request type: GET
+Description: Get the comments pertaining to a movie rec in a group. postID is the groupRecID that identifies movie recs in groups
+
+Endpoint: 'endorsemovierecingroup/'
+Request type: POST
+Description: Endorse a recommendation in a group. Provide a postID to endorse
+
+Endpoint: 'movierecendorsements/<int:pk>/delete'
+Request type: DELETE
+Description: Remove an endorsement from a recommendation
+
+Endpoint: endorsemovierecingroup/
+Request tpye: POST
+Description: Endorse a movie rec. provide a postID. A user can only endorse a movie once
+
+Endpoint: movierecendorsements/<int:pk>/delete
+Request type: POST
+Description: Remove an endorsement from a post
+
+Endpoint: movierecsingroups/<int:postID>/endorsements
+Request type: GET
+Description: Get users who endorse a post
+
+Endpoint: likecommentonmovierec/
+Request type: POST
+Description: Like a comment. Provide a commentID
+
+Endpoint: likeoncomment/<int:pk>/delete
+Request type: DELETE
+Description: Remove a like from a comment. Provide a commentID
+
+Endpoint: commentsonmovierec/<int:commentID>/likes
+Request type: GET
+Description: Get the user who like a comment
+
+Endpoint: currentuserrecs/
+Request Type: Get
+Description: Get the recommendations for the current user
+
+Endpoint: users/<int:userID>/movierecommendations
+Request Type: GET
+Description: provide a user id to get a users recommendations
+
+Endpoint: currentuser/movierecsfeed
+Request Type: GET
+Description: Get the movie recs feed for all the movie recs that are in the users groups
+
+Endpoint: currentuser/commonmovierecsfeed/<int:userID>
+Request Type: GET
+Description: Get the movie recs feed between two users. Not sure why i added this tbh...
+
+Endpoint: currentuser/commongroups/<int:userID>
+Request Type: GET
+Description: get the list of common groups between the current user and another
+
+Endpoint: movierecingroup/<int:pk>
+Request type: GET
+Description: Get a movierecingroup by primary key
+
+Endpoint: groups/<int:groupID>/movierecs-revised
+Request type: Get
+Description: Get movierecsingroup by groupID should be used for group feeds now
+
+Endpoint: 'movierecsingroups/<int:postID>/endorsements/delete-current-user-endorsement'
+Requesty Type: DELETE
+Description: Delete an endorsement from a post
+
+Endpoint: 'commentsonmovierec/<int:commentID>/likes/delete-current-user-like'
+Request type: Delete
+Description: Delete current user like from a comment
+
+Endpoint: 'movierecommendation/<int:movieRecID>/groupsbelongsto'
+Request type: GET
+Description: Get the list of groups that the movierec specified is in
+
+Endpoint: movies/titles/<str:title>/<int:limit>
+Request type: GET
+Description: Search for movies by title. Searches by string contains. Limit limts how many repsonses are contained. Needs additional work/ research
+
+Endpoint: group-management/uploadphoto/
+Request type: POST
+Description: provide int groupID and string fileName. What is returned will have S3Key with it, this should be used to upload the photo to s3
+
+Endpoint: groups/<int:groupID>/getprofilepickey
+Request Type: Get
+Description: provide groupId and get the latest groupproPic info. The info contains S3Key which can be used to get the picture
+
+Endpoint: user-management/currentuser/photoupload
+Request Type: POST
+Description: Provide fileName. Returns s3 key with response
+
+Endpoint: 'user/currentprofilepicture'
+Request type: Get
+Decription: Returns information the current users profile picture
+
+Endpoint: user/<int:userID>/profilepicture
+Request Type: Get
+Description: Return information a specific users profile picture
+
+Endpoint: 'movietvsearch/titles/<str:title>/<int:limittv>/<int:limitmovie>'
+Request Type: Get
+Description: Return movies and TV shows by title. Provide a limit for both tv shows and movies
+
+Endpoint: 'tv/titles/<str:title>/<int:limit>'
+Request Type: GET
+Description: Return TV shows by title
+
+Endpoint: 'tvshow/<int:pk>'
+Request Type: GET
+Description: Return data for tv show by title
+
+Endpoint: 'recsingroups/<int:postID/commments'
+Request Type: GET
+Description: Return comment AND user info for a given postID
+
+Endpoint: 'groups/<int:groupID>/feed'
+Request Type: GET
+Description: Get the full feed for a group including posts, users, endorsements, likes, etc
+
+Endpoint: 'currentuser/groups'
+Request Type: GET
+Description: Get the full side list of group information
+
+Endpoint: 'currentuser/notifications/'
+Request Type: GET
+Description: Get notifications for current user. include ?limit=x&offset=x. Response will contain 'next' for loading more
+
+Endpoint: 'currentuser/notifications/<int:pk>/seen'
+Request Type: PATCH
+Description: Mark notification as seen
+
+Endpoint: 'groups/<int:groupID>/groupchat/uploadphoto'
+Request type: Post
+Description: provide groupID and fileName and it will return with an S3 key. Use that S3Key to post...
+
+Endpoint: 'currentuser/overallfeedlo/'
+Request type: GET
+Description: Returns overall feed for user. Following the url provide ?limit=x&offset=x. The response will contain 'next' so you have a url to use to implement scrolling and whatnot
+
+Endpoint: 'groups/<int:groupID>/feedlo/'
+Request Type: Get
+Description: Returns group feed. Include ?limit=x&offset=x. The response will contain 'next' so you have a url to use to implement scrolling
+
+Endpoint: groups/<int:groupID>/groupphotos/
+Request Type: Get
+Description: Returns group photos with standard pagination format
+
+Endpoint: 'currentuser/addtointerested/'
+Request Type: POST
+Description: Adds an item to a users interested list. If the user doesn't have an interested list, it will create one. Currently must include either a tvShowID or a movieID
+
+Endpoint: 'createlist/'
+Request type: POST
+Description: Creates a user list. need to provide nameOfRankings with the POST. By default lists are unordered, if you'd ike it ot be an ordered list then provide ordered=True
+
+Endpoint: 'additemtolist/'
+Request type: POST
+Description: Include rankingList=<id of ranking list>. Add an item to a list. Provide either a movieID or a tvShowID or a podcastID or a bookID. For bookID and podcastID it should be our internal ID not the ones from google/spotify, those won't work and also 
+provide a rankingList which should be the id of the list your adding to. For episodes include podcastID and episodeID again use our internal ids To add
+an item to the list from search do the same thing but add X and use the external ID. i.e if you are using an external bookID use bookIDX and pass that in,
+or podcastIDX and/or episodeIDX. To add item from search for movie and tv shows use movieIDX or tvShowIDX
+
+Endpoint: 'currentuser/lists/'
+Request type: GET
+Description: Get the current users lists... needs to be fleshed out more
+
+Endpoint: 'lists/<int:rankingsID>/items/'
+Request Type: GET
+Description: Get the items in a list given the ID of the list
+
+Endpoint: 'lists/<int:pk>/update/'
+Request Type: DELETE, PATCH
+Description: Change the properties of a list or delete it... data you can submit to change nameOfRankings, publicToGroups (i.e. allow people in your groups to see it or have it be private)
+
+Endpoint: 'listitems/<int:pk>/update/'
+Request type: DELETE, PATCH
+Description: Update or change items in a list... Currently not really any reason to use PATCH
+
+Endpoint: 'currentuser/removefrominterested/'
+Request type: DELETE
+Description: Provide movieID or tvShowID=x to remove something from interested... x is an integer
+
+Endpoint: 'currentuser/exclusions/'
+Request type: GET
+Decription: Get the exclusions on the main feed that a user currently has on the main feed
+
+Endpoint: 'currentuser/deleteexclusion/'
+Request type: DELETE
+Description: Remove an exclusion from exclusions list. Provide either the groupID or the exclusionID
+
+Endpoint: 'currentuser/addexclusion/'
+Request type: POST
+Description: Provide groupID to exclude it from main feed for the current user
+
+Endpoint: 'currentuser/report/'
+Request type: POST
+Description: Report a post by including either a groupRecID or a commentID. Optionally include reportComment if you want to leave comment as to why it was reported
+
+Endpoint: 'books/search/'
+Request Type: GET
+Description: Search for books from google books API. Provide query param with ?q for the search term
+
+Endpoint: 'currentuser/recommendbook/'
+Request Type: Post
+Description: Provide bookID= as well as the recommenderRating and recommendationDesc. the bookID comes from the 'id' field in the books search results
+
+Endpoint: 'currentuser/reccomendmovie/'
+Request Type: Post
+Description: Provide movieID as well as recommenderRating and recommendationDesc. The movieID comes from the 'id' field in the movie's search results
+
+Endpoint: 'currentuser/recommendshow/'
+Request Type: Post
+Description: Provide tvShowID as well as recommenderRating and recommendationDesc. The tvShowID comes from the 'id' field in the TV's search results 
+
+Endpoint: 'podcasts/search/'
+Request Type: GET
+Description: Search for podcasts from Spotify podcast API. Provide query param with ?q for the search term
+
+Endpoint: 'currentuser/reccomendpodcast/'
+Request Type: POST
+Description: Add a podast recommendation. Provide a podcastID= from the 'id' field in podcast search as well as recommenderRating and recommendationDesc
+
+Endpoint: 'currentuser/recommendpodcastepisode/'
+Request Typee: POST
+Description: Add a podcast and episode recommendation. provide a podcastID, episodeID, recommenderRating, and recommendationDesc, both podcastID and episodeID come from the spotify 'id' in their search
+
+Endpoint: 'podcasts/episodes/'
+Request Type: GET
+Description: Get episodes for a podcast. Provide ?podcastID=x where the id comes from spotify 'id' search not out internal ids
+
+Endpoint: 'currentuser/addorremoveendorsement/'
+Request Type: Post
+Description: Include recID (not a postID) and this will create an endorsement if one doesn'y already exist and delete one if the user has already endorsed that post
+
+Endpoint: 'joingroupbycode/'
+Request Type: Post
+Description: Include joinGroupCode (comes from group information) in order to join a group. If the join group is not valid or user is already in group will throw an error. 
+
+Endpoint: "movietv/search/'
+Request Type: GET 
+Description: Search TMDB for movies and TV show. Attach query with?query=xxx&page=y where xxx is a search term and page is for when you wana scroll paast first page, by defaut is 1
+
+Endpoint: 'currentuser/leavegroup/'
+Request Type: DELETE
+Description: provide groupID that you want to leave. Must be a valid group that your in or will throw error. 
+
+Endpoint: 'userlists/'
+Request Type: GET
+Description: provide userID as query param and get user lists. i.e userlists/?userID=xxx
+
+Endpoint: 'users/search/'
+Request Type: GET
+Description: Provide username= or phoneNumber= as a query param to search for users
+
+Endpoint: 'groupmanagement/<int:pk>/update-admin'
+Request Type: PATCH
+Description: Allows the owner of the group to change owners only. Provide createrUserID as data. I know it is spelled incorrectly.
+
+Endpoint: 'ping/'
+Request Type: GET
+Description: If your token is not valid will return 401, otherwise 200

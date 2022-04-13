@@ -1,0 +1,1 @@
+Note that on login to the current EC2 server the most recent code will be pulled by launch_script.sh which is in the .bashrc profile
